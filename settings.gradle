@@ -1,2 +1,7 @@
 include ':FtcRobotController'
 include ':TeamCode'
+include ':TrajectoryActions'
+include ':BeepBeep:BeepBeepCore'
+include ':BeepBeep:BeepBeepWin'
+include ':BeepBeep:BeepBeepApp'
+include ':TrajectoryActions'
