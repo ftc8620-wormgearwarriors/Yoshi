@@ -18,10 +18,11 @@ public class Robots {
 
     public enum FieldBackground {
         centerStage,
-        intoTheDeep
+        intoTheDeep,
+        Decode
     }
 
-    public FieldBackground background = FieldBackground.intoTheDeep;  // define this variable to set the background
+    public FieldBackground background = FieldBackground.Decode;  // define this variable to set the background
 
     public Robots() {
         // add puts robot into menu
