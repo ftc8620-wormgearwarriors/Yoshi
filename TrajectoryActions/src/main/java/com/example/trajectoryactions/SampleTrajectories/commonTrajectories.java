@@ -13,6 +13,9 @@ public class commonTrajectories {
     static public Pose2d startPosA4 = new Pose2d( 16,  63.5, Math.toRadians(270));
     static public Pose2d startPosF2 = new Pose2d(-36, -63.5, Math.toRadians(90));
     static public Pose2d startPosF4 = new Pose2d( 16, -63.5, Math.toRadians(270));
+    static public Pose2d startPosA6 = new Pose2d( -48, 48, Math.toRadians(135));
+    static public Pose2d startPosF3 = new Pose2d( 64, 17, Math.toRadians(180));
+
     static public int speed = 1;
 
 
