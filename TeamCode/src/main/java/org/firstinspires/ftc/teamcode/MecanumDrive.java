@@ -53,7 +53,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Config
-public final class MecanumDrive implements Drive { // implements Drive
+public final class MecanumDrive implements Drive {
+    public double getRawExternalHeading() {
+        return 0;
+    } // implements Drive
     public static class Params {
         // IMU orientation
         // TODO: fill in these values based on
@@ -61,7 +64,7 @@ public final class MecanumDrive implements Drive { // implements Drive
         public RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection =
                 RevHubOrientationOnRobot.LogoFacingDirection.UP;
         public RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection =
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+                RevHubOrientationOnRobot.UsbFacingDirection.LEFT;
 
         // drive model parameters
         public double inPerTick = 1;
@@ -139,7 +142,8 @@ public final class MecanumDrive implements Drive { // implements Drive
             imu = lazyImu.get();
 
             // TODO: reverse encoders if needed
-            //   leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+//               leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+//               leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
             this.pose = pose;
         }
@@ -237,7 +241,8 @@ public final class MecanumDrive implements Drive { // implements Drive
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // TODO: reverse motor directions if needed
-        //   leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+           leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+           leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // TODO: make sure your config has an IMU with this name (can be BNO or BHI)
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
@@ -246,7 +251,7 @@ public final class MecanumDrive implements Drive { // implements Drive
 
         voltageSensor = hardwareMap.voltageSensor.iterator().next();
 
-        localizer = new DriveLocalizer(pose);
+        localizer = new PinpointLocalizer(hardwareMap, PARAMS.inPerTick, pose);
 
         FlightRecorder.write("MECANUM_PARAMS", PARAMS);
     }
@@ -495,7 +500,18 @@ public final class MecanumDrive implements Drive { // implements Drive
                 defaultVelConstraint, defaultAccelConstraint
         );
     }
+
+    @Override
+    public Pose2d findEndPos(Action a) {
+        return null;
+    }
+
     public void setPose(Pose2d p) {localizer.setPose(p);}   // Added for BeepBeep and TrajectoryAction compatibility
     public Pose2d getPose() {return localizer.getPose();}      // Added for BeepBeep and TrajectoryAction compatibility
+
+    @Override
+    public void drawRobotWgW(Canvas c, Pose2d t) {
+
+    }
 
 }
